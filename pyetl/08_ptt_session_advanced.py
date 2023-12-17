@@ -13,11 +13,7 @@ data = {}
 
 ss = requests.session()
 
-print(ss.cookies)
-
 ss.get(ptt_gossiping_url, headers=HEADERS)
-
-print(ss.cookies)
 
 res_landing_page = ss.get(landing_page_url, headers=HEADERS)
 soup_landing_page = BeautifulSoup(res_landing_page.text, "html.parser")

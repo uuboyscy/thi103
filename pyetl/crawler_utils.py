@@ -9,14 +9,12 @@ HEADERS = {
 
 
 class ArticleInfo:
-
     def __init__(self, article_title: str, article_url: str) -> None:
         self.article_title = article_title
         self.article_url = article_url
 
 
 class PttIndexInfo:
-
     def __init__(self, next_link: str, article_info_list: List[ArticleInfo]) -> None:
         self.next_link = next_link
         self.article_info_list = article_info_list
@@ -26,11 +24,11 @@ def extract_article(article_url: str) -> str:
     response = requests.get(article_url, headers=HEADERS)
     soup = BeautifulSoup(response.text, "html.parser")
     main_content_tag = soup.find("div", id="main-content")
-    
+
     for tag in ["div", "span", "a"]:
         for extract_tag in main_content_tag.find_all(tag):
             extract_tag.extract()
-    
+
     return main_content_tag.text
 
 
@@ -49,9 +47,7 @@ def get_stock(url: str) -> PttIndexInfo:
         if a_element and "公告" not in a_element.string and "閒聊" not in a_element.string:
             article_title = a_element.text
             article_url = "https://www.ptt.cc" + a_element.get("href")
-            article_info_list.append(
-                (article_title, article_url)
-            )
+            article_info_list.append((article_title, article_url))
 
     next_link = soup.find("a", string="‹ 上頁")
 

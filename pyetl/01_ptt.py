@@ -5,6 +5,7 @@ HEADERS = {
     "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
 }
 
+
 def get_stock(url):
     response = requests.get(url, headers=HEADERS)
     html = response.text
@@ -28,7 +29,8 @@ def get_stock(url):
             print(a_element.text)
 
     next_link = soup.find("a", string="‹ 上頁")
-    return ("https://www.ptt.cc/" + next_link.get("href")) if next_link else None
+    # return "https://www.ptt.cc" + next_link.get("href")
+    return ("https://www.ptt.cc" + next_link.get("href")) if next_link else None
 
 
 url = "https://www.ptt.cc/bbs/Stock/index.html"

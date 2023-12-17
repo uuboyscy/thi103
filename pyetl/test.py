@@ -1,3 +1,4 @@
+# empty string "", 0 -> Flase
 result = -1
 
 if result:

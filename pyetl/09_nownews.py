@@ -16,5 +16,11 @@ json_data = json.loads(res.text)
 # pprint.pprint(json_data)
 
 for news in json_data.get("data").get("newsList"):
-    print(news)
+    img_url = news["imageUrl"]
+    res_img = requests.get(img_url, headers=HEADERS)
+
+    with open(f"nownews_img/{news['id']}.webp", "wb") as f:
+        f.write(res_img.content)
+
+    # print(news)
     print("===============")

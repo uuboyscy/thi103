@@ -1,5 +1,6 @@
-from flask import Flask, request, render_template
+from flask import Flask, request, render_template,Blueprint
 
+import model
 import poker as p
 
 app = Flask(__name__, static_url_path="/resource", static_folder="resource")
@@ -114,6 +115,17 @@ def poker():
         "poker.html",
         request_method=request_method,
         cards=cards,
+    )
+
+
+@app.route("/show_staff")
+def hello_google():
+    staff_data = model.getStaff()
+    column = ["ID", "Name", "DeptId", "Age", "Gender", "Salary"]
+    return render_template(
+        "show_staff.html",
+        staff_data=staff_data,
+        column=column,
     )
 
 

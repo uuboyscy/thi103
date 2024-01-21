@@ -1,9 +1,11 @@
-from flask import Flask, request, render_template,Blueprint
+from flask import Flask, request, render_template
 
 import model
 import poker as p
+from controller.api_v1 import api_v1
 
 app = Flask(__name__, static_url_path="/resource", static_folder="resource")
+app.register_blueprint(api_v1, url_prefix="/api")
 
 @app.route("/")
 def hello():
